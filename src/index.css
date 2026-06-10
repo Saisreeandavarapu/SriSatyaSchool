@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playpen+Sans:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Outfit', sans-serif;
+  --font-hand: 'Playpen Sans', cursive;
+  
+  --color-brand-blue: #0ea5e9;
+  --color-brand-blue-dark: #0369a1;
+  --color-brand-green: #10b981;
+  --color-brand-green-dark: #047857;
+  --color-brand-orange: #ff6b4a;
+  --color-brand-orange-dark: #ea580c;
+  --color-brand-yellow: #fbbf24;
+  --color-brand-yellow-dark: #d97706;
+  --color-brand-purple: #8b5cf6;
+  --color-brand-purple-dark: #6d28d9;
+  --color-brand-dark: #0f172a;
+  --color-brand-light: #f8fafc;
+  
+  --animate-float: float 3s ease-in-out infinite;
+  --animate-pulse-subtle: pulse-subtle 2s ease-in-out infinite;
+  --animate-draw: draw 1.5s ease-out forwards;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.95; transform: scale(0.98); }
+}
+
+@keyframes draw {
+  to { stroke-dashoffset: 0; }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-brand-dark);
+  background-color: var(--color-brand-light);
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Custom wave clipping classes */
+.clip-wave-bottom {
+  clip-path: ellipse(80% 90% at 50% 10%);
+}
+
+.clip-curve-down {
+  clip-path: path('M 0 0 L 0 80 Q 50 100 100 80 L 100 0 Z');
+}
+
+/* Custom styles for cards that resemble reference design */
+.sketch-border-orange {
+  border: 3px solid #ff6b4a;
+  border-radius: 24px;
+}
+
+.sketch-border-green {
+  border: 3px solid #10b981;
+  border-radius: 24px;
+}
+
+.sketch-border-blue {
+  border: 3px solid #0ea5e9;
+  border-radius: 24px;
+}
