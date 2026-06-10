@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, MapPin, GraduationCap, Menu, X, ArrowRight, Lock, ClipboardList } from 'lucide-react';
+import { Phone, MapPin, GraduationCap, Menu, X, Lock, ClipboardList } from 'lucide-react';
 
 interface HeaderProps {
   activeSection: string;
