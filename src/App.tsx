@@ -10,14 +10,20 @@ import { Testimonials } from './components/Testimonials';
 import { Admissions } from './components/Admissions';
 import { ContactUs } from './components/ContactUs';
 import { Footer } from './components/Footer';
+import { SplashScreen } from './components/SplashScreen';
+import { LoginModal } from './components/LoginModal';
+import { AdmissionFormModal } from './components/AdmissionFormModal';
 
 function App() {
   const [activeSection, setActiveSection] = useState('home');
+  const [showSplash, setShowSplash]       = useState(true);
+  const [loginOpen,  setLoginOpen]        = useState(false);
+  const [applyOpen,  setApplyOpen]        = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       const sections = ['home', 'about', 'academics', 'olympiads', 'faculty', 'gallery', 'testimonials', 'admissions', 'contact'];
-      const scrollPosition = window.scrollY + 140; // offset to trigger slightly before center
+      const scrollPosition = window.scrollY + 140;
 
       for (const sectionId of sections) {
         const el = document.getElementById(sectionId);
@@ -39,43 +45,60 @@ function App() {
   const handleNavClick = (sectionId: string) => {
     const el = document.getElementById(sectionId);
     if (el) {
-      // Offset for sticky navigation bar (approx 95px)
       const headerOffset = 95;
       const elementPosition = el.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.scrollY - headerOffset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-      
-      // Manually set active state in case scroll listener hasn't fired yet
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
       setActiveSection(sectionId);
     }
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-brand-light antialiased">
-      {/* Sticky Header Navigation */}
-      <Header activeSection={activeSection} onNavClick={handleNavClick} />
+    <>
+      {/* ── 10-second animated splash screen ── */}
+      {showSplash && (
+        <SplashScreen onComplete={() => setShowSplash(false)} />
+      )}
 
-      {/* Main Sections */}
-      <main className="flex-grow">
-        <Hero onNavClick={handleNavClick} />
-        <AboutUs />
-        <Academics />
-        <Olympiads />
-        <Faculty />
-        <Gallery />
-        <Testimonials />
-        <Admissions />
-        <ContactUs />
-      </main>
+      {/* ── Modals ── */}
+      <LoginModal
+        isOpen={loginOpen}
+        onClose={() => setLoginOpen(false)}
+      />
+      <AdmissionFormModal
+        isOpen={applyOpen}
+        onClose={() => setApplyOpen(false)}
+      />
 
-      {/* Footer */}
-      <Footer onNavClick={handleNavClick} />
-    </div>
+      {/* ── Main Website ── */}
+      <div className="min-h-screen flex flex-col bg-brand-light antialiased">
+        <Header
+          activeSection={activeSection}
+          onNavClick={handleNavClick}
+          onLoginClick={() => setLoginOpen(true)}
+          onApplyClick={() => setApplyOpen(true)}
+        />
+
+        <main className="flex-grow">
+          <Hero
+            onNavClick={handleNavClick}
+            onApplyClick={() => setApplyOpen(true)}
+          />
+          <AboutUs />
+          <Academics />
+          <Olympiads />
+          <Faculty />
+          <Gallery />
+          <Testimonials />
+          <Admissions />
+          <ContactUs />
+        </main>
+
+        <Footer onNavClick={handleNavClick} />
+      </div>
+    </>
   );
 }
 
 export default App;
+

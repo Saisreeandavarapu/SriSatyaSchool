@@ -4,9 +4,10 @@ import heroLearning from '../assets/hero_learning.png';
 
 interface HeroProps {
   onNavClick: (sectionId: string) => void;
+  onApplyClick: () => void;
 }
 
-export const Hero: React.FC<HeroProps> = ({ onNavClick }) => {
+export const Hero: React.FC<HeroProps> = ({ onNavClick, onApplyClick }) => {
   return (
     <section 
       id="home" 
@@ -51,7 +52,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavClick }) => {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
               <button
-                onClick={() => onNavClick('admissions')}
+                onClick={onApplyClick}
                 className="bg-brand-orange hover:bg-brand-orange-dark text-white font-extrabold text-base px-8 py-4 rounded-2xl shadow-lg shadow-brand-orange/30 hover:shadow-xl hover:shadow-brand-orange/40 transform hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
               >
                 Apply Online Now <ArrowRight size={18} />

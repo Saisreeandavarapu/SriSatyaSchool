@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, MapPin, GraduationCap, Menu, X, ArrowRight } from 'lucide-react';
+import { Phone, MapPin, GraduationCap, Menu, X, ArrowRight, Lock, ClipboardList } from 'lucide-react';
 
 interface HeaderProps {
   activeSection: string;
   onNavClick: (sectionId: string) => void;
+  onLoginClick: () => void;
+  onApplyClick: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ activeSection, onNavClick }) => {
+export const Header: React.FC<HeaderProps> = ({ activeSection, onNavClick, onLoginClick, onApplyClick }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -104,10 +106,16 @@ export const Header: React.FC<HeaderProps> = ({ activeSection, onNavClick }) => 
             </button>
           ))}
           <button
-            onClick={() => handleNavItemClick('admissions')}
+            onClick={onApplyClick}
             className="ml-3 bg-brand-orange hover:bg-brand-orange-dark text-white font-bold text-sm px-4 py-2 rounded-2xl shadow-md shadow-brand-orange/20 hover:shadow-lg hover:shadow-brand-orange/30 transform hover:-translate-y-0.5 transition-all duration-200 flex items-center gap-1"
           >
-            Enquire Now <ArrowRight size={14} />
+            Apply Now <ClipboardList size={14} />
+          </button>
+          <button
+            onClick={onLoginClick}
+            className="ml-2 bg-brand-dark hover:bg-gray-800 text-white font-bold text-sm px-4 py-2 rounded-2xl shadow-md transition-all duration-200 flex items-center gap-1 hover:-translate-y-0.5"
+          >
+            <Lock size={13} /> Login
           </button>
         </div>
 
@@ -142,10 +150,16 @@ export const Header: React.FC<HeaderProps> = ({ activeSection, onNavClick }) => 
             </button>
           ))}
           <button
-            onClick={() => handleNavItemClick('admissions')}
+            onClick={() => { onApplyClick(); setIsMobileMenuOpen(false); }}
             className="w-full mt-4 bg-brand-orange text-white font-bold py-3.5 rounded-2xl shadow-lg shadow-brand-orange/20 flex items-center justify-center gap-2"
           >
-            Enquire Now <ArrowRight size={16} />
+            Apply Now <ClipboardList size={16} />
+          </button>
+          <button
+            onClick={() => { onLoginClick(); setIsMobileMenuOpen(false); }}
+            className="w-full mt-3 bg-brand-dark text-white font-bold py-3.5 rounded-2xl flex items-center justify-center gap-2"
+          >
+            <Lock size={16} /> Admin Login
           </button>
         </div>
         <div className="bg-gray-50 p-6 border-t border-gray-100 flex flex-col gap-3">
